@@ -43,18 +43,20 @@
             var url = 'https://script.google.com/macros/s/AKfycbxby8rlOqtjBRGHO9QZt1lfHTOSIXIhC4g6qXUxnwFiZfZ9P_VMe-6tSbJcW_q3ZNE1/exec';  // Reemplaza con la URL de tu Web App
 
             // Realizar la solicitud al Web App de Google Apps Script
-            fetch(url + '?respuesta1=' + respuesta1 + '&respuesta2=' + respuesta2)
-                .then(response => response.json())
-                .then(data => {
-                    // Mostrar el puntaje y la conducta en el mensaje
-                    var mensaje = 'Puntaje: ' + data.puntaje + '\n';
-                    mensaje += 'Conducta: ' + data.conducta;
-                    document.getElementById('mensaje').innerText = mensaje;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('mensaje').innerText = 'Hubo un error, por favor intentalo de nuevo.';
-                });
+            fetch(url + '?respuesta1=' + respuesta1 + '&respuesta2=' + respuesta2, {
+  method: 'GET',
+  mode: 'no-cors'  // Cambiar a 'no-cors'
+})
+.then(response => response.json())
+.then(data => {
+    var mensaje = 'Puntaje: ' + data.puntaje + '\n';
+    mensaje += 'Conducta: ' + data.conducta;
+    document.getElementById('mensaje').innerText = mensaje;
+})
+.catch(error => {
+    console.error('Error:', error);
+    document.getElementById('mensaje').innerText = 'Hubo un error, por favor intentalo de nuevo.';
+});
         }
     </script>
 </body>
